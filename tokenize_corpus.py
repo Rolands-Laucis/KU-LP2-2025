@@ -3,7 +3,8 @@ from collections import Counter
 import json
 
 counter = Counter()
-corpus_path = join('data', 'lang_corpus', 'en', 'corpus.txt')
+lang = 'es'
+corpus_path = join('data', 'lang_corpus', lang, 'corpus.txt')
 
 i = 0
 with open(corpus_path, 'r', encoding='utf-8') as f:
@@ -21,12 +22,12 @@ with open(corpus_path, 'r', encoding='utf-8') as f:
     vocab = {token:idx for idx, token in enumerate(sorted_tokens)}
 
     # Save vocab
-    with open(join('data', 'lang_corpus', 'en', 'vocab.json'), 'w', encoding='utf-8') as f:
+    with open(join('data', 'lang_corpus', lang, 'vocab.json'), 'w', encoding='utf-8') as f:
         json.dump(vocab, f, indent=2)
 
 i = 0
 with open(corpus_path, 'r', encoding='utf-8') as f:
-    with open(join('data', 'lang_corpus', 'en', 'corpus_tokens.txt'), 'w', encoding='utf-8') as out:
+    with open(join('data', 'lang_corpus', lang, 'corpus_tokens.txt'), 'w', encoding='utf-8') as out:
         print('Tokenizing corpus...')
         for line in f:
             words = line.strip().split()
@@ -36,3 +37,7 @@ with open(corpus_path, 'r', encoding='utf-8') as f:
             i += 1
             if i % 100000 == 0:
                 print(f'Processed {i} lines...', end='\r')
+
+            if i > 10000000:
+                print(f'processed {i} lines')
+                break

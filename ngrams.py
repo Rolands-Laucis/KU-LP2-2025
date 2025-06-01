@@ -3,14 +3,15 @@ import os
 import pickle
 from collections import Counter
 
-max_sentences = 8000000
-for n in range(5, 6):
+max_sentences = 10000000
+lang = 'es'
+for n in range(2, 5):
     c = Counter()
     l = 0
     print(f'Training {n}-gram model on max {max_sentences} sentences...')
 
     # load corpus
-    with open(join('data', 'lang_corpus', 'en', 'corpus_tokens.txt'), 'r', encoding='utf-8') as f:
+    with open(join('data', 'lang_corpus', {lang}, 'corpus_tokens.txt'), 'r', encoding='utf-8') as f:
         for line in f:
             # read tokens from the file
             tokens = list(map(int, line.strip().split()))
@@ -33,7 +34,7 @@ for n in range(5, 6):
             # exit(0)
 
     # Save the model
-    output_dir = join('models', 'ngrams')
+    output_dir = join('models', lang)
     os.makedirs(output_dir, exist_ok=True)
     model_path = join(output_dir, f'{n}-gram-{max_sentences}.pkl')
     with open(model_path, 'wb') as model_file:
