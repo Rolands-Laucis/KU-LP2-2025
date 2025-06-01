@@ -11,7 +11,7 @@ for n in range(2, 5):
     print(f'Training {n}-gram model on max {max_sentences} sentences...')
 
     # load corpus
-    with open(join('data', 'lang_corpus', {lang}, 'corpus_tokens.txt'), 'r', encoding='utf-8') as f:
+    with open(join('data', 'lang_corpus', lang, 'corpus_tokens.txt'), 'r', encoding='utf-8') as f:
         for line in f:
             # read tokens from the file
             tokens = list(map(int, line.strip().split()))
